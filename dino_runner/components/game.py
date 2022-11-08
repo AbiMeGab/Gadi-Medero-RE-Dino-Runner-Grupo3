@@ -4,7 +4,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self):
         pygame.init()
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
@@ -14,10 +14,10 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-        self.player = Dinosaur
+        self.player = Dinosaur()
 
     def run(self):
-        self.playing: True
+        self.playing = True
         while self.playing:
             self.events()
             self.update()
@@ -48,4 +48,5 @@ class Game:
         if self.x_pos_bg <= -image_width:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
+        self.x_pos_bg -= self.game_speed
             
