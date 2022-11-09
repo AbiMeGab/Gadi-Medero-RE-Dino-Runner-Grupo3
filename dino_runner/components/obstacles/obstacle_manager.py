@@ -11,9 +11,9 @@ class ObstacleManager:
         if len(self.obstacles) == 0:
             cactus_size = random.randint(0, 1)
             if cactus_size == 0:
-                self.obstacles.append(Cactus(LARGE_CACTUS))
+                self.obstacles.append(Cactus(LARGE_CACTUS, 300))
             else:
-                self.obstacles.append(Cactus(SMALL_CACTUS))
+                self.obstacles.append(Cactus(SMALL_CACTUS, 325))
 
         for obstacle in self.obstacles:
             obstacle.update(self.obstacles)
