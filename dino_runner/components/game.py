@@ -1,7 +1,7 @@
 import pygame
 
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RUNNING
+from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RUNNING, GAME_SPEED, POINTS)
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components import text_utils
 from dino_runner.components.player_hearts.player_heart_manager import PlayerHeartManager
@@ -14,13 +14,12 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.playing = False
-        self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
-
-        self.points = 0
+        self.game_speed = GAME_SPEED
+        self.points = POINTS
         self.running = True
         self.death_count = 0
 
@@ -108,9 +107,11 @@ class Game:
 
         self.screen.blit(RUNNING[0], (half_screen_width -20, half_screen_height -140))
 
+    def reset_score(self):
+       pass 
+
     def show_menu(self):
         self.running = True
-
         white_color = (255, 255, 255)
         self.screen.fill(white_color)
         self.print_menu_elements()
