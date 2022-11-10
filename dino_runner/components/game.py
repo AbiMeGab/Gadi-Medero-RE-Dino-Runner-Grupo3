@@ -87,6 +87,7 @@ class Game:
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
+                self.reset_game()
                 self.run()
 
     def print_menu_elements(self):
@@ -107,8 +108,9 @@ class Game:
 
         self.screen.blit(RUNNING[0], (half_screen_width -20, half_screen_height -140))
 
-    def reset_score(self):
-       pass 
+    def reset_game(self):
+       self.points = POINTS
+       self.game_speed = GAME_SPEED
 
     def show_menu(self):
         self.running = True
