@@ -8,8 +8,8 @@ class Obstacle(Sprite):
         self.rect = self.image[self.type].get_rect() #Rect es el que dibuja el rectángulo en la pantalla.
         self.rect.x = SCREEN_WIDTH
 
-    def update(self, obstacles):
-        self.rect.x -= 5
+    def update(self, game_speed, obstacles):
+        self.rect.x -= game_speed
         if self.rect.x <- self.rect.width:
             obstacles.pop()
 
