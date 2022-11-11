@@ -21,18 +21,26 @@ class ObstacleManager:
 
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles, self.obstacle_size)
+
+            if game.player.hammer is not None and game.player.hammer.rect.colliderect(obstacle.rect):
+                game.player.hammer.kill()
+                self.obstacles.pop()
+            else:
+                obstacle.update(game.game_speed, self.obstacles, self.obstacle_size)
+
             if game.player.dino_rect.colliderect(obstacle.rect):
-                pygame.time.delay(100)
-                self.obstacles=[]
-                game.player_heart_manager.reduce_heart()
-                if game.player_heart_manager.heart_count > 0:
-                    #game.player_show = False
-                    pass
-                else: 
-                    pygame.time.delay(500)
-                    game.playing = False
-                    game.death_count += 1
-                    break
+                if not game.player.shield:
+                    game.player_heart_manager.reduce_heart()
+                    if game.player_heart_manager.heart_count > 0:
+                        #game.player_show = False
+                        pass
+                    else: 
+                        pygame.time.delay(500)
+                        game.playing = False
+                        game.death_count += 1
+                        break
+                else:
+                    self.obstacles.remove(obstacle)
 
     def draw(self, screen):
         for obstacle in self.obstacles:

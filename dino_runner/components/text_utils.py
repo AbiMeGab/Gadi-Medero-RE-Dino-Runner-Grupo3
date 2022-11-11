@@ -1,8 +1,8 @@
 import pygame
 
-from dino_runner.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from dino_runner.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT, FONT_STYLE
 
-FONT_STYLE = 'freesansbold.ttf'
+FONT_STYLE = FONT_STYLE
 black_color = (0, 0, 0)
 
 def get_score_element(points):

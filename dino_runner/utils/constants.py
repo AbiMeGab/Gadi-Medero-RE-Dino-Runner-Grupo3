@@ -63,6 +63,9 @@ BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
 ]
 
+FONT_STYLE = os.path.join(IMG_DIR, 'Fonts/8-bit-pusab.ttf')
+SHIELD_FONT = os.path.join(IMG_DIR, 'Fonts/VeniceClassic.ttf')
+
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
@@ -71,6 +74,13 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
-DEFAULT_TYPE = "default"
+JUMP_SOUND = os.path.join(IMG_DIR, 'Soundtrack/jump_dino.wav')
+DEATH_SOUND = os.path.join(IMG_DIR, 'Soundtrack/death_dino.wav')
+SHIELD_SOUND = os.path.join(IMG_DIR, 'Soundtrack/la-tijuana-banda-la-chona-instrumental.mp3')
+PRINCIPAL_SONG = os.path.join(IMG_DIR, 'Soundtrack/sinnesloschen-beam-117362.mp3')
 
+HAMMER_POWER_UP = 10
+DEFAULT_TYPE = "default"
+SHIELD_TYPE = "shield"
+HAMMER_TYPE = "hammer"
 HEART_COUNT = 3
