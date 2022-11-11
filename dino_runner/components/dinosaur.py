@@ -14,7 +14,8 @@ DEFAULT_TYPE,
 SHIELD_TYPE,
 HAMMER_TYPE,
 SHIELD_SOUND,
-HAMMER_SOUND)
+HAMMER_SOUND,
+JUMP_SOUND)
 from pygame.sprite import Sprite
 from dino_runner.components.hammer import Hammer
 
@@ -49,6 +50,7 @@ class Dinosaur(Sprite):
         
         self.shield_sound = pygame.mixer.Sound(SHIELD_SOUND)
         self.hammer_sound = pygame.mixer.Sound(HAMMER_SOUND)
+        self.jump_sound = pygame.mixer.Sound(JUMP_SOUND)
 
     def setup_state_booleans(self):
         self.has_powerup = False
@@ -67,14 +69,17 @@ class Dinosaur(Sprite):
             self.run()
         
         if user_input[pygame.K_DOWN] and not self.dino_jump:
+            self.jump_sound.stop()
             self.dino_run = False
             self.dino_duck = True
             self.dino_jump = False
         elif user_input[pygame.K_UP] and not self.dino_jump:
+            self.jump_sound.play()
             self.dino_run = False
             self.dino_duck = False
             self.dino_jump = True
         elif not self.dino_jump:
+            self.jump_sound.stop()
             self.dino_run = True
             self.dino_duck = False
             self.dino_jump = False

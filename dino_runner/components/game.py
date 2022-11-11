@@ -2,7 +2,7 @@ import pygame
 
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RUNNING, GAME_OVER, GAME_SPEED, POINTS, PRINCIPAL_SONG)
+from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RESTART, GAME_OVER, GAME_SPEED, POINTS, PRINCIPAL_SONG, DEAD)
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components import text_utils
 from dino_runner.components.player_hearts.player_heart_manager import PlayerHeartManager
@@ -59,7 +59,7 @@ class Game:
             if event.type == pygame.QUIT:
                 self.playing = False
                 self.running = False
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((255, 150, 150))
 
     def update(self):
         user_input = pygame.key.get_pressed()
@@ -69,7 +69,7 @@ class Game:
         self.cloud_manager.update()
 
     def draw(self):
-        self.score() ##Mostrar el score en tiempo real en la pantalla
+        self.score() ##Show the score on screen in real time
         self.clock.tick(FPS)
         self.draw_background()
         self.player.draw(self.screen)
@@ -115,19 +115,20 @@ class Game:
 
         if self.death_count == 0:
             text, text_rect = text_utils.get_centred_message('Press any Key to Start')
+            self.screen.blit(ICON, (half_screen_width -30, half_screen_height -140))
             self.screen.blit(text, text_rect)
         elif self.death_count > 0:
             text, text_rect = text_utils.get_centred_message('Press any Key to Restart')
-            score, score_rect = text_utils.get_centred_message('Your score: ' + str(self.points), height=half_screen_height + 50)
-            death, death_rect = text_utils.get_centred_message('Death count: ' + str(self.death_count), height=half_screen_height + 100)
-
+            score, score_rect = text_utils.get_centred_message('Your score: ' + str(self.points), height=half_screen_height + 150)
+            death, death_rect = text_utils.get_centred_message('Death count: ' + str(self.death_count), height=half_screen_height + 200)
             self.screen.blit(score, score_rect)
             self.screen.blit(text, text_rect)
             self.screen.blit(death, death_rect)
             self.screen.blit(GAME_OVER, (half_screen_width - 200, half_screen_height - 200))
+            self.screen.blit(DEAD, (half_screen_width -30, half_screen_height -140))
+            self.screen.blit(RESTART, (half_screen_width -30, half_screen_height + 45))
             
-
-        self.screen.blit(RUNNING[0], (half_screen_width -10, half_screen_height -140))
+        
 
     def reset_game(self):
        self.points = POINTS

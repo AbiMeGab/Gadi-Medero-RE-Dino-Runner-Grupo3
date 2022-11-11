@@ -2,12 +2,13 @@ import pygame
 import random
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.cactus import Cactus
-from dino_runner.utils.constants import (SMALL_CACTUS, LARGE_CACTUS, BIRD)
+from dino_runner.utils.constants import (SMALL_CACTUS, LARGE_CACTUS, BIRD, DEATH_SOUND)
 
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
         self.obstacle_size = 0
+        self.dead_sound = pygame.mixer.Sound(DEATH_SOUND)
 
     def update(self, game):
         if len(self.obstacles) == 0:
@@ -30,6 +31,7 @@ class ObstacleManager:
 
             if game.player.dino_rect.colliderect(obstacle.rect):
                 if not game.player.shield:
+                    self.dead_sound.play()
                     self.obstacles = []
                     game.player_heart_manager.reduce_heart()
                     if game.player_heart_manager.heart_count > 0:
