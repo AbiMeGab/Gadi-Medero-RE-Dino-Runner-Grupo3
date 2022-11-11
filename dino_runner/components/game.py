@@ -2,7 +2,7 @@ import pygame
 
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RESTART, GAME_OVER, GAME_SPEED, POINTS, PRINCIPAL_SONG, DEAD)
+from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RESTART, GAME_OVER, GAME_SPEED, POINTS, PRINCIPAL_SONG, DEAD, DEFAULT_TYPE)
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components import text_utils
 from dino_runner.components.player_hearts.player_heart_manager import PlayerHeartManager
@@ -134,6 +134,7 @@ class Game:
        self.points = POINTS
        self.game_speed = GAME_SPEED
        self.create_components()
+       self.player.type = DEFAULT_TYPE
 
     def show_menu(self):
         self.running = True
