@@ -2,15 +2,17 @@ import pygame
 
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RUNNING, GAME_SPEED, POINTS, PRINCIPAL_SONG)
+from dino_runner.utils.constants import (BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, RUNNING, GAME_OVER, GAME_SPEED, POINTS, PRINCIPAL_SONG)
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components import text_utils
 from dino_runner.components.player_hearts.player_heart_manager import PlayerHeartManager
+from dino_runner.components.decorations.clouds_manager import CloudManager
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
+        pygame.mixer.music.load(PRINCIPAL_SONG)
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -26,6 +28,8 @@ class Game:
         self.death_count = 0
         self.power_up_manager = PowerUpManager()
         self.player_heart_manager = PlayerHeartManager()
+        pygame.mixer.music.play(loops=-1, start=8.5) #To skip the music one second before the piano starts playing
+        self.cloud_manager = CloudManager()
 
     def run(self):
         self.playing = True
@@ -33,19 +37,22 @@ class Game:
             self.events()
             self.update()
             self.draw()
+            pygame.mixer.music.pause()
+        else:
+            pygame.mixer.music.unpause()
     
     def create_components(self):
         self.obstacle_manager.reset_obstacles(self)
         self.power_up_manager.reset_power_ups(self.points)
         self.player_heart_manager.reset_hearts()
         self.points = 0
-        self.game_speed = 20
+        self.game_speed = GAME_SPEED
+        self.cloud_manager.reset_clouds()
 
     def execute(self):
         while self.running:
             if not self.playing:
                 self.show_menu()
-                pygame.mixer.Sound(PRINCIPAL_SONG).play(-1)
 
     def events(self):
         for event in pygame.event.get():
@@ -59,6 +66,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.power_up_manager.update(self.points, self.game_speed, self.player)
+        self.cloud_manager.update()
 
     def draw(self):
         self.score() ##Mostrar el score en tiempo real en la pantalla
@@ -68,6 +76,7 @@ class Game:
         self.obstacle_manager.draw(self.screen)
         self.player_heart_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
+        self.cloud_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
     
@@ -115,8 +124,10 @@ class Game:
             self.screen.blit(score, score_rect)
             self.screen.blit(text, text_rect)
             self.screen.blit(death, death_rect)
+            self.screen.blit(GAME_OVER, (half_screen_width - 200, half_screen_height - 200))
+            
 
-        self.screen.blit(RUNNING[0], (half_screen_width -20, half_screen_height -140))
+        self.screen.blit(RUNNING[0], (half_screen_width -10, half_screen_height -140))
 
     def reset_game(self):
        self.points = POINTS

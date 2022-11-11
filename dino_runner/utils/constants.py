@@ -6,7 +6,7 @@ TITLE = "Chrome Dino Runner"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
 FPS = 30
-GAME_SPEED = 20
+GAME_SPEED = 10
 POINTS = 0
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
@@ -63,6 +63,8 @@ BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
 ]
 
+GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
+
 FONT_STYLE = os.path.join(IMG_DIR, 'Fonts/8-bit-pusab.ttf')
 SHIELD_FONT = os.path.join(IMG_DIR, 'Fonts/VeniceClassic.ttf')
 
@@ -76,8 +78,9 @@ HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 JUMP_SOUND = os.path.join(IMG_DIR, 'Soundtrack/jump_dino.wav')
 DEATH_SOUND = os.path.join(IMG_DIR, 'Soundtrack/death_dino.wav')
-SHIELD_SOUND = os.path.join(IMG_DIR, 'Soundtrack/la-tijuana-banda-la-chona-instrumental.mp3')
-PRINCIPAL_SONG = os.path.join(IMG_DIR, 'Soundtrack/sinnesloschen-beam-117362.mp3')
+SHIELD_SOUND = os.path.join(IMG_DIR, 'Soundtrack/la-tijuana-banda-la-chona-instrumental.wav')
+HAMMER_SOUND = os.path.join(IMG_DIR, 'Soundtrack/mixkit-cartoon-toy-whistle-616.wav')
+PRINCIPAL_SONG = os.path.join(IMG_DIR, 'Soundtrack/sinnesloschen-beam-117362.ogg')
 
 HAMMER_POWER_UP = 10
 DEFAULT_TYPE = "default"
