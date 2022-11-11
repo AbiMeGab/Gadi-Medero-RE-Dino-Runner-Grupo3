@@ -88,6 +88,7 @@ class Dinosaur(Sprite):
             self.step_index = 0
 
         if self.hammer_enabled > 0 and user_input[pygame.K_SPACE]:
+            self.hammer_sound.set_volume(0.1)
             self.hammer_sound.play()
             self.hammer = Hammer(self.dino_rect.x + 100, self.dino_rect.y + 50)
             self.hammer_enabled = max(self.hammer_enabled - 1, 0)
@@ -125,6 +126,7 @@ class Dinosaur(Sprite):
             time_to_show = round((self.shield_time_up - pygame.time.get_ticks()) / 1000, 2)
             if time_to_show >= 0:
                 if self.show_text:
+                    self.shield_sound.set_volume(0.1)
                     self.shield_sound.play()
                     #pygame.mixer.Sound(SHIELD_SOUND).play()
                     fond = pygame.font.Font(SHIELD_FONT, 42)

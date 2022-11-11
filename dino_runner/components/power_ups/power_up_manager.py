@@ -3,7 +3,7 @@ import pygame
 
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.hammer_power_up import HammerPowerUp
-from dino_runner.utils.constants import (HAMMER_POWER_UP, SHIELD_SOUND)
+from dino_runner.utils.constants import (HAMMER_POWER_UP)
 
 class PowerUpManager:
     def __init__(self):
